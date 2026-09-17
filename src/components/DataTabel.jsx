@@ -11,13 +11,16 @@ import DialogForm from "./DialogForm";
 import { Input } from "./ui/input";
 import { Field } from "./ui/field";
 import DialogDelete from "./DialogDelete";
+import DialogUpdate from "./DialogUpdate";
 
 function DataTabel() {
   const [Loading, setLoading] = useState(false);
   const [Students, setStudents] = useState([]);
   const [IsFormOpen, setIsFormOpen] = useState(false);
+  const [IsUpdateOpen, setIsUpdateOpen] = useState(false);
   const [IsDetailOpen, setIsDetailOpen] = useState(false);
   const [IsDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [SelectUpdate, setSelectUpdate] = useState(null);
   const [SelectDelete, setSelectDelete] = useState(null);
   const [SelectStudent, setSelectStudent] = useState(null);
 
@@ -94,7 +97,12 @@ function DataTabel() {
               <td className="w-full py-3 px-4 border-b text-sm flex items-center justify-start">
                 <span className="grid grid-cols-3 gap-2">
                   <Button size="icon" variant="default">
-                    <Link>
+                    <Link
+                      onClick={() => {
+                        setIsUpdateOpen(true);
+                        setSelectUpdate(Student.id);
+                      }}
+                    >
                       <Pencil />
                     </Link>
                   </Button>
@@ -139,6 +147,12 @@ function DataTabel() {
         data={SelectStudent}
         open={IsDetailOpen}
         onOpenChange={setIsDetailOpen}
+      />
+      <DialogUpdate
+        open={IsUpdateOpen}
+        onOpenChange={setIsUpdateOpen}
+        id={SelectUpdate}
+        refreshData={getStudents}
       />
     </div>
   );

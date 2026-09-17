@@ -88,7 +88,7 @@ function DialogDetail({ data, open, onOpenChange }) {
           </div>
           <DialogFooter className={"justify-start!"}>
             <div
-              className={`flex items-center gap-2 ${Detail?.status === "aktif" ? "text-green-500" : "bg-red-500"}`}
+              className={`flex items-center gap-2 ${Detail?.status === "aktif" ? "text-green-500" : "text-red-500"}`}
             >
               <p className="text-muted-foreground">Status Siswa:</p>{" "}
               {Detail?.status === "aktif" ? "Aktif" : "Nonaktif"}

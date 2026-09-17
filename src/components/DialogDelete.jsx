@@ -14,10 +14,10 @@ import { Trash2Icon } from "lucide-react";
 import { Spinner } from "./ui/spinner";
 
 function DialogDelete({ student, refreshData, open, onOpenChange }) {
-  const [IsDelete, setIsDelete] = useState(null);
+const [Loading, setLoading] = useState(null);
 
   const handleDelete = async (id) => {
-    setIsDelete(id);
+    setLoading(id);
     try {
       await api.delete(`/student/${id}`);
       refreshData();
@@ -26,7 +26,7 @@ function DialogDelete({ student, refreshData, open, onOpenChange }) {
     } catch (error) {
       toast.error(error.response?.data?.message);
     } finally {
-      setIsDelete(null);
+      setLoading(null);
     }
   };
 
@@ -49,7 +49,7 @@ function DialogDelete({ student, refreshData, open, onOpenChange }) {
             variant="destructive"
             onClick={() => handleDelete(student.id)}
           >
-            Delete {IsDelete ? <Spinner /> : <Trash2Icon />}
+            Delete {Loading ? <Spinner /> : <Trash2Icon />}
           </Button>
         </DialogFooter>
       </DialogContent>
